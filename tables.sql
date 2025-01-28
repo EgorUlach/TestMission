@@ -1,0 +1,22 @@
+CREATE DATABASE test_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_groups (
+     user_id INT NOT NULL,
+     group_id INT NOT NULL,
+     PRIMARY KEY (user_id, group_id),
+     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+     FOREIGN KEY (group_id) REFERENCES test_db.type_groups(id) ON DELETE CASCADE
+);
+
+CREATE TABLE type_groups (
+     `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+     `name` varchar(100) NOT NULL
+);
